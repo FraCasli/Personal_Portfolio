@@ -16,6 +16,26 @@
   font-display: swap;
 }
 
+/* Jost (SIL OFL, self-hosted): geometric sans closely matching Futura's
+   shapes, used as the active fallback until licensed Futura LT files are
+   available. Both weights share one variable-font file, same as Google's
+   own delivery. */
+@font-face {
+  font-family: "Jost";
+  src: url("/assets/fonts/Jost-Variable.woff2") format("woff2");
+  font-weight: var(--font-weight-light);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("/assets/fonts/Jost-Variable.woff2") format("woff2");
+  font-weight: var(--font-weight-book);
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {

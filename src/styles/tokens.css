@@ -9,10 +9,11 @@
   --color-bg: var(--color-white);
   --color-bar-bg: var(--color-grey);
   --color-bar-text: var(--color-white);
+  --color-gold: #f3d49d; /* hero title/identity over the home photo, not a bound Figma variable */
 
   /* Typography */
-  --font-family-base: "Futura LT", "Century Gothic", "Avenir Next", sans-serif;
-  --font-weight-light: 300;
+  --font-family-base: "Futura LT", "Jost", "Century Gothic", "Avenir Next", sans-serif;
+  --font-weight-light: 200;
   --font-weight-book: 400;
 
   --font-size-sm: 1rem; /* 16px */

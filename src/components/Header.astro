@@ -1,40 +1,48 @@
 ---
+import { Image } from "astro:assets";
 import TopBar from "./TopBar.astro";
 import SiteNav from "./SiteNav.astro";
 import { withBase } from "../utils/url";
+import heroMountain from "../assets/images/hero-mountain.jpg";
 ---
 
 <header class="site-header">
   <TopBar />
 
-  <div class="hero container">
-    <div class="hero__portrait">
-      <img
-        src={withBase("/assets/images/hero-portrait.jpg")}
-        alt="Francesca Caslini accanto a un modello architettonico di legno"
-        width="400"
-        height="836"
-      />
-    </div>
+  <div class="hero">
+    <Image
+      class="hero__bg"
+      src={heroMountain}
+      alt="Cresta innevata al tramonto"
+      widths={[640, 960, 1440, 1920]}
+      sizes="100vw"
+      priority
+    />
 
-    <div class="hero__identity">
-      <div class="hero__signature-block">
-        <p class="hero__name">Francesca Caslini</p>
-        <p class="hero__role">MSc Arch. PoliMi</p>
-        <img
-          class="hero__signature"
-          src={withBase("/assets/images/signature.png")}
-          alt="Firma di Francesca Caslini"
-          width="162"
-          height="68"
-        />
+    <div class="hero__overlay container">
+      <div class="hero__top">
+        <div class="hero__top-right">
+          <div class="hero__identity">
+            <p class="hero__name">Francesca Caslini</p>
+            <p class="hero__role">MSc Arch. PoliMi</p>
+            <img
+              class="hero__signature"
+              src={withBase("/assets/images/signature.png")}
+              alt="Firma di Francesca Caslini"
+              width="162"
+              height="68"
+            />
+          </div>
+
+          <SiteNav class="hero__nav" />
+        </div>
       </div>
 
-      <h1 class="hero__title">Architecture portfolio</h1>
-      <p class="hero__hint">Scroll to see the selected projects</p>
+      <div class="hero__title-block">
+        <h1 class="hero__title">Architecture portfolio</h1>
+        <p class="hero__hint">Scroll to see the selected projects</p>
+      </div>
     </div>
-
-    <SiteNav />
   </div>
 </header>
 
@@ -44,24 +52,48 @@ import { withBase } from "../utils/url";
   }
 
   .hero {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-    padding: var(--space-7) var(--space-3);
+    position: relative;
+    aspect-ratio: 1920 / 1034;
+    overflow: hidden;
   }
 
-  .hero__portrait img {
+  .hero__bg {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    aspect-ratio: 400 / 836;
+    height: 100%;
     object-fit: cover;
   }
 
-  .hero__signature-block {
+  .hero__overlay {
+    position: relative;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-3);
+  }
+
+  .hero__top {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hero__top-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-3);
+  }
+
+  .hero__identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     gap: var(--space-1);
+    text-align: right;
+    color: var(--color-gold);
   }
 
   .hero__name {
@@ -77,13 +109,18 @@ import { withBase } from "../utils/url";
   }
 
   .hero__signature {
-    width: 8rem;
+    width: 6rem;
     height: auto;
-    margin-top: var(--space-2);
+    margin-top: var(--space-1);
+  }
+
+  .hero__title-block {
+    align-self: flex-end;
+    text-align: right;
+    color: var(--color-gold);
   }
 
   .hero__title {
-    margin-top: var(--space-7);
     font-weight: var(--font-weight-book);
     font-size: var(--font-size-xl);
     letter-spacing: var(--tracking-wide);
@@ -92,15 +129,14 @@ import { withBase } from "../utils/url";
   }
 
   .hero__hint {
-    margin-top: var(--space-4);
+    margin-top: var(--space-3);
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-sm);
   }
 
-  @media (min-width: 64rem) {
-    .hero {
-      grid-template-columns: 1fr 2fr 1fr;
-      align-items: start;
+  @media (min-width: 40rem) {
+    .hero__signature {
+      width: 8rem;
     }
   }
 </style>
