@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { projects } from "../data/projects";
+import { withBase } from "../utils/url";
 
 interface Props {
   class?: string;
@@ -9,7 +10,7 @@ const { class: className } = Astro.props;
 
 const builtSlugs = new Set((await getCollection("projects")).map((entry) => entry.slug));
 
-const linkFor = (slug: string) => (builtSlugs.has(slug) ? `/projects/${slug}/` : `/#${slug}`);
+const linkFor = (slug: string) => withBase(builtSlugs.has(slug) ? `/projects/${slug}/` : `/#${slug}`);
 
 const professionalProjects = projects.filter((p) => p.category === "professional");
 const universityProjects = projects.filter((p) => p.category === "university");
@@ -17,7 +18,7 @@ const universityProjects = projects.filter((p) => p.category === "university");
 
 <nav class:list={["site-nav", className]} aria-label="Sezioni del portfolio">
   <ul>
-    <li><a href="/">Home</a></li>
+    <li><a href={withBase("/")}>Home</a></li>
     <li>
       <details>
         <summary>Professional projects</summary>
@@ -38,7 +39,7 @@ const universityProjects = projects.filter((p) => p.category === "university");
         </ul>
       </details>
     </li>
-    <li><a href="/curriculum-vitae">Curriculum vitae</a></li>
+    <li><a href={withBase("/curriculum-vitae")}>Curriculum vitae</a></li>
   </ul>
 </nav>
 

@@ -15,10 +15,28 @@ Portfolio statico costruito con Astro a partire dal design Figma
 Comandi:
 ```
 npm install
-npm run dev       # dev server, default http://localhost:4321
+npm run dev       # dev server, http://localhost:4321/Personal_Portfolio/ (vedi nota base path)
 npm run build     # genera l'output statico in dist/
 npm run preview   # serve dist/ localmente per verifica pre-deploy
 ```
+
+## Deploy su GitHub Pages
+
+- `astro.config.mjs` imposta `site: "https://fracasli.github.io"` e
+  `base: "/Personal_Portfolio"` — necessario perché GitHub Pages di progetto serve il sito da
+  un sottopercorso, non dalla root del dominio. **Con `base` impostato, anche il dev server
+  gira sotto quel sottopercorso** (`http://localhost:4321/Personal_Portfolio/`), non su `/`.
+- Tutti i link/percorsi interni (`href`, `src` di immagini in `public/`) passano dall'helper
+  `src/utils/url.ts` → `withBase(path)`, che prefissa con `import.meta.env.BASE_URL`. Le immagini
+  gestite da `astro:assets` (`<Image>`, import diretti in `src/assets/`) sono già prefissate
+  automaticamente da Astro e non serve toccarle.
+  **Se aggiungi un nuovo link o `<img src="/...">` hardcoded, passalo sempre da `withBase()`**,
+  altrimenti sotto GitHub Pages punterà alla root sbagliata.
+- Il workflow `.github/workflows/deploy.yml` builda il sito (`npm ci && npm run build`) e pubblica
+  `dist/` su GitHub Pages a ogni push su `main`. **Passo manuale una tantum**: nelle impostazioni
+  della repo GitHub → Settings → Pages → Source, selezionare "GitHub Actions" (non "Deploy from a
+  branch").
+- Se cambi nome alla repo o account GitHub, aggiorna `site`/`base` in `astro.config.mjs` di conseguenza.
 
 ## Struttura
 

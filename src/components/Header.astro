@@ -1,6 +1,7 @@
 ---
 import TopBar from "./TopBar.astro";
 import SiteNav from "./SiteNav.astro";
+import { withBase } from "../utils/url";
 ---
 
 <header class="site-header">
@@ -9,7 +10,7 @@ import SiteNav from "./SiteNav.astro";
   <div class="hero container">
     <div class="hero__portrait">
       <img
-        src="/assets/images/hero-portrait.jpg"
+        src={withBase("/assets/images/hero-portrait.jpg")}
         alt="Francesca Caslini accanto a un modello architettonico di legno"
         width="400"
         height="836"
@@ -22,7 +23,7 @@ import SiteNav from "./SiteNav.astro";
         <p class="hero__role">MSc Arch. PoliMi</p>
         <img
           class="hero__signature"
-          src="/assets/images/signature.png"
+          src={withBase("/assets/images/signature.png")}
           alt="Firma di Francesca Caslini"
           width="162"
           height="68"

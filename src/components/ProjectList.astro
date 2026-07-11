@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { projects } from "../data/projects";
+import { withBase } from "../utils/url";
 import thumbGarniBarPost from "../assets/images/projects/ristorante-garni-bar-post/01-exterior.jpeg";
 import thumbCasaSb from "../assets/images/projects/thumb-casa-sb.png";
 import thumbVersoSud from "../assets/images/projects/thumb-verso-sud.png";
@@ -40,7 +41,7 @@ const builtSlugs = new Set((await getCollection("projects")).map((entry) => entr
       const Tag = isBuilt ? "a" : "div";
       return (
         <li id={project.slug}>
-          <Tag class="project-row" href={isBuilt ? `/projects/${project.slug}/` : undefined}>
+          <Tag class="project-row" href={isBuilt ? withBase(`/projects/${project.slug}/`) : undefined}>
             <p class="project-row__code">{project.code}</p>
             <p class="project-row__meta">
               {project.location}<br />{project.type}
