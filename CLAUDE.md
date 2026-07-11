@@ -44,13 +44,14 @@ npm run preview   # serve dist/ localmente per verifica pre-deploy
 src/
   pages/
     index.astro          # Home: Header (hero) + ProjectList + Footer
+    curriculum-vitae.astro # Pagina CV (formazione, esperienze, skill, lingue), dati inline nel file
     projects/[slug].astro # Route dinamica: 1 pagina per ogni entry di src/content/projects/
   layouts/
     ProjectLayout.astro   # Layout condiviso delle pagine di dettaglio progetto
   components/
     TopBar.astro          # Barra grigia in alto (nome/titolo portfolio/"selected works")
-    SiteNav.astro         # Menu Home / Professional / University / CV, riusato in home + dettaglio
-    Header.astro          # Hero della home: ritratto + identità + titolo + SiteNav
+    SiteNav.astro         # Menu Home / Professional / University / CV, riusato ovunque
+    Header.astro          # Hero della home: foto di sfondo full-bleed + identità + titolo + SiteNav overlay
     Footer.astro          # Barra di contatto in fondo pagina ("Page Down")
     ProjectList.astro     # Elenco righe progetto nella home (usa src/data/projects.ts)
   data/
@@ -62,12 +63,15 @@ src/
     tokens.css             # Design token (colori, font, spaziatura)
     main.css                # Reset + stili globali, importa tokens.css
   assets/images/
-    hero-portrait.jpg, signature.png  # immagini home (già ottimizzate manualmente in public/)
+    hero-mountain.jpg     # Foto di sfondo hero home (croppata/specchiata da Figma, vedi sotto)
+    cv-portrait.jpg        # Ritratto usato nella pagina CV
     projects/<slug>/NN-nome.ext        # elaborati di galleria per ogni progetto
     projects/thumb-<slug>.png          # miniature usate SOLO nella home list
 public/assets/
-    images/hero-portrait.jpg, signature.png  # NON passano da astro:assets (usate via <img> diretto in Header)
-    fonts/FuturaLT-{Light,Book}.woff2         # attesi da main.css ma NON presenti (vedi "Font mancanti")
+    images/signature.png  # firma, NON passa da astro:assets (usata via <img> diretto, riusata in Header + CV)
+    fonts/
+      FuturaLT-{Light,Book}.woff2  # attesi da main.css ma NON presenti (vedi "Font mancanti")
+      Jost-Variable.woff2           # font fallback self-hosted attivo, vedi "Font mancanti"
 ```
 
 ## Doppia fonte dati dei progetti (IMPORTANTE)
@@ -94,9 +98,10 @@ senza generare link rotti.
 
 Estratti dalle variabili Figma del file (`Base`, `Titolo`, `Blu`):
 
-- Colori: `--color-black`, `--color-white`, `--color-grey` (#d7d7d7, barre), `--color-blue` (#5F7489, hover)
-- Font: `--font-family-base` = "Futura LT" con fallback "Century Gothic"/"Avenir Next"/sans-serif;
-  pesi `--font-weight-light` (Futura LT Light) e `--font-weight-book` (Futura LT Book)
+- Colori: `--color-black`, `--color-white`, `--color-grey` (#d7d7d7, barre), `--color-blue` (#5F7489, hover),
+  `--color-gold` (#f3d49d, testo overlay sulla foto hero — hex letterale, non è una variabile Figma legata)
+- Font: `--font-family-base` = "Futura LT" con fallback "Jost" (self-hosted) poi "Century Gothic"/"Avenir Next"/sans-serif;
+  pesi `--font-weight-light` (200, Futura LT Light) e `--font-weight-book` (400, Futura LT Book)
 - Dimensioni: `--font-size-sm` (16px body), `--font-size-md` (20px titoli/barre), `--font-size-xl` (46px hero)
 - Letter-spacing: `--tracking-base` (2%, testo normale), `--tracking-wide` (15%, titoli/maiuscolo)
 - Spaziatura: scala `--space-1`…`--space-9` su base 8px
@@ -109,16 +114,28 @@ Figma non espone font a licenza commerciale. `main.css` ha già gli `@font-face`
 public/assets/fonts/FuturaLT-Light.woff2
 public/assets/fonts/FuturaLT-Book.woff2
 ```
-**Questi file non esistono** — il sito al momento usa il fallback di sistema (Century Gothic/Avenir
-Next/sans-serif). Se si recuperano i file del font, basta metterli in quel percorso: nessuna modifica
-al codice necessaria.
+**Questi file non esistono.** Nel frattempo `main.css` definisce anche `@font-face` per **Jost**
+(`public/assets/fonts/Jost-Variable.woff2`, SIL OFL, self-hosted — scaricato da Google Fonts), un
+geometric sans open-source molto vicino a Futura, messo in `--font-family-base` subito dopo "Futura LT"
+nella catena di fallback. È lui il font effettivamente attivo oggi (Futura LT fallisce silenziosamente
+il 404 e il browser passa a Jost). Se si recuperano i file veri di Futura LT, basta metterli nel percorso
+sopra: **nessuna modifica al codice necessaria**, torneranno ad avere priorità automaticamente.
 
 ## Layout condiviso
 
-Sia `Header.astro` (home) sia `ProjectLayout.astro` (dettaglio) usano la stessa griglia a 3 colonne
-`1fr 2fr 1fr` da 64rem in su (colonna sinistra / centrale contenuto / colonna destra nav), per
-coerenza visiva. `SiteNav` usa `<details>/<summary>` per i sottomenu Professional/University —
-accessibile e senza JS.
+`ProjectLayout.astro` (dettaglio progetto) e `curriculum-vitae.astro` usano la stessa griglia a 3
+colonne `1fr 2fr 1fr` da 64rem in su (colonna sinistra / centrale contenuto / colonna destra nav), per
+coerenza visiva. Le pagine di dettaglio progetto hanno inoltre due linee separatrici (`border-top`
+grigio) nella colonna sinistra: una tra titolo e lista dettagli, una tra lista dettagli e descrizione;
+ogni riga dettaglio è resa come `Label   -   Valore` (dash via `::before` su `dd`). `SiteNav` usa
+`<details>/<summary>` per i sottomenu Professional/University — accessibile e senza JS.
+
+`Header.astro` (home) è diverso: è una foto a piena larghezza (`aspect-ratio: 1920/1034`) con testo
+in overlay (`position:absolute` sull'immagine, poi un `div` `position:relative` sopra in flex
+column). Identità (nome/ruolo/firma) e `SiteNav` sono in alto a destra sopra la foto; titolo
+"Architecture portfolio" e hint scroll sono in basso a destra. Il colore del testo overlay
+(nome/titolo/hint) è `--color-gold`; `SiteNav` invece resta nero di default (leggibile comunque
+sulla foto in quel punto — verificato via screenshot, nessun override necessario).
 
 ## Riferimento ai frame Figma
 
@@ -138,13 +155,25 @@ Ogni pagina progetto è stata generata da un frame "Slide 16:9 - N" nel file Fig
 | agency-of-future | `46:205` (Slide 16:9 - 9) | b5 |
 | colonie | `46:261` (Slide 16:9 - 10) | b6 |
 
+Pagine non-progetto: Home = frame `1:334` ("Home"), Curriculum vitae = frame `1:112`
+("Curriculum Vitae"). Non seguono la convenzione "Slide 16:9 - N" delle pagine progetto.
+
 ## Cose note ma non ancora fatte
 
 - **Stalla Montaccio** (comparso nel menu Figma come "a2 | Stalla Montaccio", frame `3523:1804`,
   Slide 16:9 - 16): il frame è un duplicato non ancora modificato di "Ristorante Garni Bar Post"
   (stesso titolo/testo/immagini). Non ha contenuti propri in Figma: nessuna pagina costruita finché
-  non viene popolato.
-- **Curriculum vitae**: link presente in `SiteNav` (`/curriculum-vitae`) ma la pagina non esiste ancora.
-- **Font Futura LT**: vedi sopra, fallback di sistema attivo.
+  non viene popolato. **Nota**: nel menu Figma attuale questo progetto occupa la posizione "a2",
+  spostando Casa SB/Verso Sud/Casa LN rispettivamente ad a3/a4/a5 — `src/data/projects.ts` non
+  riflette questo shift (mantiene Casa SB come a2 ecc.) perché Stalla Montaccio resta escluso dal
+  manifest finché non ha contenuti propri; se un giorno viene popolato, riallineare i `code`.
+- **Font Futura LT**: vedi sopra — fallback attivo su Jost (self-hosted), non più sul solo fallback
+  di sistema.
+- **Hero home** (`Header.astro`): l'immagine `src/assets/images/hero-mountain.jpg` è stata ricavata
+  ritagliando e specchiando orizzontalmente l'asset sorgente di Figma (il frame applicava un
+  `rotate-180` + `scaleY(-1)`, equivalente netto a un mirror orizzontale, più uno zoom/crop non
+  uniforme risolto calcolando l'area visibile in pixel sorgente). Se l'immagine cambia di nuovo in
+  Figma va rifatto lo stesso procedimento (o semplicemente ri-esportata l'immagine già ritagliata
+  da Figma, se disponibile).
 - Il file Figma sorgente può essere stato modificato dopo l'ultima sincronizzazione: se aggiungi
   progetti o modifichi contenuti in Figma, questo file va tenuto aggiornato di conseguenza.
