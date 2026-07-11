@@ -1,0 +1,47 @@
+:root {
+  /* Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-grey: #d7d7d7;
+  --color-blue: #5f7489;
+
+  --color-text: var(--color-black);
+  --color-bg: var(--color-white);
+  --color-bar-bg: var(--color-grey);
+  --color-bar-text: var(--color-white);
+
+  /* Typography */
+  --font-family-base: "Futura LT", "Century Gothic", "Avenir Next", sans-serif;
+  --font-weight-light: 300;
+  --font-weight-book: 400;
+
+  --font-size-sm: 1rem; /* 16px */
+  --font-size-md: 1.25rem; /* 20px */
+  --font-size-xl: 2.875rem; /* 46px */
+
+  --line-height-base: 1.4;
+  --line-height-tight: 1;
+
+  --tracking-base: 0.02em; /* 2% */
+  --tracking-wide: 0.15em; /* 15% */
+
+  /* Spacing scale (base unit 8px) */
+  --space-1: 0.5rem; /* 8px */
+  --space-2: 1rem; /* 16px */
+  --space-3: 1.5rem; /* 24px */
+  --space-4: 2rem; /* 32px */
+  --space-5: 3rem; /* 48px */
+  --space-6: 4rem; /* 64px */
+  --space-7: 5rem; /* 80px */
+  --space-8: 5.5rem; /* 88px */
+  --space-9: 8rem; /* 128px */
+
+  /* Layout */
+  --content-max-width: 120rem; /* 1920px design reference */
+  --bar-height: 2.75rem; /* 44px */
+  --size-thumb: 10rem; /* 160px */
+
+  /* Effects */
+  --opacity-dim: 0.5;
+  --transition-base: 0.2s ease;
+}

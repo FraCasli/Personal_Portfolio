@@ -1,0 +1,34 @@
+---
+interface Props {
+  href?: string;
+}
+const { href } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag class="topbar" href={href}>
+  <p>Francesca Caslini</p>
+  <p>Architecture portfolio 2018 - 2024</p>
+  <p>Selected works</p>
+</Tag>
+
+<style>
+  .topbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--color-bar-bg);
+    color: var(--color-bar-text);
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-book);
+    font-size: var(--font-size-md);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .topbar p {
+    white-space: nowrap;
+  }
+</style>

@@ -1,0 +1,94 @@
+---
+import { getCollection } from "astro:content";
+import { projects } from "../data/projects";
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+const builtSlugs = new Set((await getCollection("projects")).map((entry) => entry.slug));
+
+const linkFor = (slug: string) => (builtSlugs.has(slug) ? `/projects/${slug}/` : `/#${slug}`);
+
+const professionalProjects = projects.filter((p) => p.category === "professional");
+const universityProjects = projects.filter((p) => p.category === "university");
+---
+
+<nav class:list={["site-nav", className]} aria-label="Sezioni del portfolio">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li>
+      <details>
+        <summary>Professional projects</summary>
+        <ul>
+          {professionalProjects.map((project) => (
+            <li><a href={linkFor(project.slug)}>{project.code}</a></li>
+          ))}
+        </ul>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>University projects</summary>
+        <ul>
+          {universityProjects.map((project) => (
+            <li><a href={linkFor(project.slug)}>{project.code}</a></li>
+          ))}
+        </ul>
+      </details>
+    </li>
+    <li><a href="/curriculum-vitae">Curriculum vitae</a></li>
+  </ul>
+</nav>
+
+<style>
+  .site-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .site-nav > ul > li > a,
+  .site-nav summary {
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--tracking-base);
+    cursor: pointer;
+  }
+
+  .site-nav summary {
+    list-style: none;
+  }
+
+  .site-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .site-nav summary::after {
+    content: "";
+    display: inline-block;
+    margin-left: var(--space-1);
+    width: 0.5em;
+    height: 0.5em;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.15s ease;
+  }
+
+  .site-nav details[open] summary::after {
+    transform: rotate(-135deg);
+  }
+
+  .site-nav details ul {
+    margin-top: var(--space-2);
+    padding-left: var(--space-3);
+    gap: var(--space-1);
+  }
+
+  .site-nav a:hover,
+  .site-nav summary:hover {
+    color: var(--color-blue);
+  }
+</style>

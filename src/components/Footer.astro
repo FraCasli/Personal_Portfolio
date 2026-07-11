@@ -1,0 +1,54 @@
+<footer class="site-footer">
+  <div class="site-footer__bar">
+    <div class="site-footer__identity">
+      <p class="site-footer__name">Francesca Caslini</p>
+      <p class="site-footer__role">MSc Arch. Polimi</p>
+    </div>
+    <div class="site-footer__contact">
+      <p>+ 39 333 743 8860</p>
+      <p><a href="mailto:francesca.caslini@mail.polimi.it">francesca.caslini@mail.polimi.it</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-7);
+    padding-top: var(--space-6);
+  }
+
+  .site-footer__bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-3);
+    background-color: var(--color-bar-bg);
+    color: var(--color-bar-text);
+  }
+
+  .site-footer__name {
+    font-family: var(--font-family-base);
+    font-weight: var(--font-weight-book);
+    font-size: var(--font-size-md);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .site-footer__role {
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-sm);
+  }
+
+  .site-footer__contact {
+    text-align: right;
+    font-weight: var(--font-weight-book);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--tracking-base);
+  }
+
+  .site-footer__contact a:hover {
+    color: var(--color-blue);
+  }
+</style>

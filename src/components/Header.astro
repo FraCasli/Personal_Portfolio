@@ -1,0 +1,105 @@
+---
+import TopBar from "./TopBar.astro";
+import SiteNav from "./SiteNav.astro";
+---
+
+<header class="site-header">
+  <TopBar />
+
+  <div class="hero container">
+    <div class="hero__portrait">
+      <img
+        src="/assets/images/hero-portrait.jpg"
+        alt="Francesca Caslini accanto a un modello architettonico di legno"
+        width="400"
+        height="836"
+      />
+    </div>
+
+    <div class="hero__identity">
+      <div class="hero__signature-block">
+        <p class="hero__name">Francesca Caslini</p>
+        <p class="hero__role">MSc Arch. PoliMi</p>
+        <img
+          class="hero__signature"
+          src="/assets/images/signature.png"
+          alt="Firma di Francesca Caslini"
+          width="162"
+          height="68"
+        />
+      </div>
+
+      <h1 class="hero__title">Architecture portfolio</h1>
+      <p class="hero__hint">Scroll to see the selected projects</p>
+    </div>
+
+    <SiteNav />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background-color: var(--color-bg);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding: var(--space-7) var(--space-3);
+  }
+
+  .hero__portrait img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 400 / 836;
+    object-fit: cover;
+  }
+
+  .hero__signature-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+
+  .hero__name {
+    font-weight: var(--font-weight-book);
+    font-size: var(--font-size-md);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .hero__role {
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-sm);
+  }
+
+  .hero__signature {
+    width: 8rem;
+    height: auto;
+    margin-top: var(--space-2);
+  }
+
+  .hero__title {
+    margin-top: var(--space-7);
+    font-weight: var(--font-weight-book);
+    font-size: var(--font-size-xl);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    line-height: var(--line-height-tight);
+  }
+
+  .hero__hint {
+    margin-top: var(--space-4);
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-sm);
+  }
+
+  @media (min-width: 64rem) {
+    .hero {
+      grid-template-columns: 1fr 2fr 1fr;
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import { projects } from "../data/projects";
+import thumbGarniBarPost from "../assets/images/projects/ristorante-garni-bar-post/01-exterior.jpeg";
+import thumbCasaSb from "../assets/images/projects/thumb-casa-sb.png";
+import thumbVersoSud from "../assets/images/projects/thumb-verso-sud.png";
+import thumbCasaLn from "../assets/images/projects/thumb-casa-ln.jpeg";
+import thumbStudentHostel from "../assets/images/projects/thumb-student-hostel.png";
+import thumbDiffusedHouse from "../assets/images/projects/thumb-diffused-house.png";
+import thumbSchoolRubattino from "../assets/images/projects/thumb-school-rubattino.png";
+import thumbHedgehog1 from "../assets/images/projects/thumb-hedgehog-1.png";
+import thumbHedgehog2 from "../assets/images/projects/thumb-hedgehog-2.png";
+import thumbAgencyOfFuture from "../assets/images/projects/thumb-agency-of-future.png";
+import thumbColonie from "../assets/images/projects/thumb-colonie.png";
+
+const thumbnails: Record<string, { src: ImageMetadata; alt: string }[]> = {
+  "ristorante-garni-bar-post": [{ src: thumbGarniBarPost, alt: "Ristorante Garni Bar Post, Castasegna" }],
+  "casa-sb": [{ src: thumbCasaSb, alt: "Casa SB, Maloja" }],
+  "verso-sud": [{ src: thumbVersoSud, alt: "Verso Sud, Crete" }],
+  "casa-ln": [{ src: thumbCasaLn, alt: "Casa LN, Stampa" }],
+  "student-hostel": [{ src: thumbStudentHostel, alt: "Student hostel, Milano" }],
+  "diffused-house": [{ src: thumbDiffusedHouse, alt: "Diffused house, Monesteroli" }],
+  "school-rubattino": [{ src: thumbSchoolRubattino, alt: "A school for Rubattino, Milano" }],
+  hedgehog: [
+    { src: thumbHedgehog1, alt: "Hedgehog, Milano — vista 1" },
+    { src: thumbHedgehog2, alt: "Hedgehog, Milano — vista 2" },
+  ],
+  "agency-of-future": [{ src: thumbAgencyOfFuture, alt: "Agency of Future, Milano" }],
+  colonie: [{ src: thumbColonie, alt: "Colonie, Milano" }],
+};
+
+const builtSlugs = new Set((await getCollection("projects")).map((entry) => entry.slug));
+---
+
+<section class="project-list" aria-label="Progetti selezionati">
+  <ul>
+    {projects.map((project) => {
+      const isBuilt = builtSlugs.has(project.slug);
+      const Tag = isBuilt ? "a" : "div";
+      return (
+        <li id={project.slug}>
+          <Tag class="project-row" href={isBuilt ? `/projects/${project.slug}/` : undefined}>
+            <p class="project-row__code">{project.code}</p>
+            <p class="project-row__meta">
+              {project.location}<br />{project.type}
+            </p>
+            <p class="project-row__meta">
+              {project.year}<br />{project.studio}
+            </p>
+            <div class="project-row__thumbs">
+              {thumbnails[project.slug].map((image) => (
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={160}
+                  height={88}
+                  class="project-row__thumb"
+                />
+              ))}
+            </div>
+          </Tag>
+        </li>
+      );
+    })}
+  </ul>
+</section>
+
+<style>
+  .project-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0 var(--space-3) var(--space-7);
+  }
+
+  .project-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-grey);
+  }
+
+  .project-row__code,
+  .project-row__meta {
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--tracking-base);
+  }
+
+  .project-row__thumbs {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .project-row__thumb {
+    width: var(--size-thumb);
+    height: auto;
+    aspect-ratio: 160 / 88;
+    object-fit: cover;
+    opacity: var(--opacity-dim);
+    transition: opacity var(--transition-base);
+  }
+
+  .project-row:hover .project-row__thumb,
+  .project-row:focus-within .project-row__thumb {
+    opacity: 1;
+  }
+
+  @media (min-width: 64rem) {
+    .project-list {
+      grid-template-columns: 1fr 2fr 1fr;
+    }
+
+    .project-list ul {
+      grid-column: 2;
+    }
+
+    .project-row {
+      grid-template-columns: 1fr 1fr 1fr auto;
+      align-items: center;
+    }
+  }
+</style>

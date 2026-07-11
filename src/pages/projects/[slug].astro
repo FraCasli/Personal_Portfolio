@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+export async function getStaticPaths() {
+  const projectEntries = await getCollection("projects");
+  return projectEntries.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const orderedProjects = (await getCollection("projects")).sort((a, b) => {
+  if (a.data.category !== b.data.category) {
+    return a.data.category === "professional" ? -1 : 1;
+  }
+  return a.data.order - b.data.order;
+});
+const currentIndex = orderedProjects.findIndex((entry) => entry.slug === project.slug);
+const next = orderedProjects[currentIndex + 1];
+---
+
+<ProjectLayout
+  title={project.data.title}
+  code={project.data.code}
+  details={project.data.details}
+  gallery={project.data.gallery}
+  nextProject={next ? { slug: next.slug, code: next.data.code } : undefined}
+>
+  <Content />
+</ProjectLayout>
