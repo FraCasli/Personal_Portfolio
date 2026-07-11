@@ -53,7 +53,7 @@ import heroMountain from "../assets/images/hero-mountain.jpg";
 
   .hero {
     position: relative;
-    aspect-ratio: 1920 / 1034;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
   }
 
@@ -85,6 +85,8 @@ import heroMountain from "../assets/images/hero-mountain.jpg";
     flex-direction: column;
     align-items: flex-end;
     gap: var(--space-3);
+    min-width: 0;
+    max-width: 100%;
   }
 
   .hero__identity {
@@ -94,11 +96,12 @@ import heroMountain from "../assets/images/hero-mountain.jpg";
     gap: var(--space-1);
     text-align: right;
     color: var(--color-gold);
+    min-width: 0;
   }
 
   .hero__name {
     font-weight: var(--font-weight-book);
-    font-size: var(--font-size-md);
+    font-size: clamp(1rem, 4.5vw, var(--font-size-md));
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
   }
@@ -116,13 +119,15 @@ import heroMountain from "../assets/images/hero-mountain.jpg";
 
   .hero__title-block {
     align-self: flex-end;
+    min-width: 0;
+    max-width: 100%;
     text-align: right;
     color: var(--color-gold);
   }
 
   .hero__title {
     font-weight: var(--font-weight-book);
-    font-size: var(--font-size-xl);
+    font-size: clamp(1.75rem, 8vw, var(--font-size-xl));
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     line-height: var(--line-height-tight);
@@ -135,8 +140,18 @@ import heroMountain from "../assets/images/hero-mountain.jpg";
   }
 
   @media (min-width: 40rem) {
+    .hero {
+      aspect-ratio: 16 / 10;
+    }
+
     .hero__signature {
       width: 10rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero {
+      aspect-ratio: 1920 / 1034;
     }
   }
 </style>

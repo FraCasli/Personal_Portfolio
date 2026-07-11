@@ -44,10 +44,16 @@ const universityProjects = projects.filter((p) => p.category === "university");
 </nav>
 
 <style>
+  .site-nav {
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .site-nav ul {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+    min-width: 0;
   }
 
   .site-nav > ul > li > a,

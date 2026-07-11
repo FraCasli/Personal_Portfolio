@@ -29,6 +29,12 @@ const Tag = href ? "a" : "div";
   }
 
   .topbar p {
-    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  @media (min-width: 64rem) {
+    .topbar p {
+      white-space: nowrap;
+    }
   }
 </style>
