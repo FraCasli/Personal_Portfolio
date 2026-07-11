@@ -15,28 +15,36 @@ Portfolio statico costruito con Astro a partire dal design Figma
 Comandi:
 ```
 npm install
-npm run dev       # dev server, http://localhost:4321/Personal_Portfolio/ (vedi nota base path)
+npm run dev       # dev server, http://localhost:4321/
 npm run build     # genera l'output statico in dist/
 npm run preview   # serve dist/ localmente per verifica pre-deploy
 ```
 
-## Deploy su GitHub Pages
+## Deploy su GitHub Pages (dominio custom)
 
-- `astro.config.mjs` imposta `site: "https://fracasli.github.io"` e
-  `base: "/Personal_Portfolio"` — necessario perché GitHub Pages di progetto serve il sito da
-  un sottopercorso, non dalla root del dominio. **Con `base` impostato, anche il dev server
-  gira sotto quel sottopercorso** (`http://localhost:4321/Personal_Portfolio/`), non su `/`.
+- Il sito è servito dal dominio custom **`www.francescacaslini.info`** (registrato su Porkbun,
+  puntato a GitHub Pages via DNS), non più da `https://fracasli.github.io/Personal_Portfolio/`.
+  Di conseguenza `astro.config.mjs` imposta solo `site: "https://www.francescacaslini.info"` e
+  **non ha più `base`** (default `"/"`): il sito è servito dalla root del dominio, non da un
+  sottopercorso. Se in futuro si tornasse a un dominio `*.github.io/<repo>` senza dominio custom,
+  andrebbe reintrodotto `base: "/<repo>"`.
+- **`public/CNAME`** contiene `www.francescacaslini.info` — file richiesto da GitHub Pages per
+  sapere che il sito va servito su quel dominio invece che su `fracasli.github.io`. Astro copia il
+  contenuto di `public/` così com'è nella root di `dist/`, quindi il CNAME arriva automaticamente
+  nel deploy. **Non rimuoverlo/rinominarlo** senza aggiornare anche le impostazioni DNS su Porkbun
+  e Settings → Pages → Custom domain su GitHub.
 - Tutti i link/percorsi interni (`href`, `src` di immagini in `public/`) passano dall'helper
-  `src/utils/url.ts` → `withBase(path)`, che prefissa con `import.meta.env.BASE_URL`. Le immagini
-  gestite da `astro:assets` (`<Image>`, import diretti in `src/assets/`) sono già prefissate
-  automaticamente da Astro e non serve toccarle.
-  **Se aggiungi un nuovo link o `<img src="/...">` hardcoded, passalo sempre da `withBase()`**,
-  altrimenti sotto GitHub Pages punterà alla root sbagliata.
+  `src/utils/url.ts` → `withBase(path)`, che prefissa con `import.meta.env.BASE_URL` (ora `"/"`,
+  quindi di fatto un no-op, ma va comunque usato per restare compatibili se `base` cambiasse di
+  nuovo in futuro). Le immagini gestite da `astro:assets` (`<Image>`, import diretti in
+  `src/assets/`) sono già prefissate automaticamente da Astro e non serve toccarle.
+  **Se aggiungi un nuovo link o `<img src="/...">` hardcoded, passalo sempre da `withBase()`**.
 - Il workflow `.github/workflows/deploy.yml` builda il sito (`npm ci && npm run build`) e pubblica
   `dist/` su GitHub Pages a ogni push su `main`. **Passo manuale una tantum**: nelle impostazioni
   della repo GitHub → Settings → Pages → Source, selezionare "GitHub Actions" (non "Deploy from a
-  branch").
-- Se cambi nome alla repo o account GitHub, aggiorna `site`/`base` in `astro.config.mjs` di conseguenza.
+  branch"), e in Settings → Pages → Custom domain impostare `www.francescacaslini.info`.
+- Se cambi dominio o torni al sottopercorso `github.io`, aggiorna `site`/`base` in
+  `astro.config.mjs` **e** `public/CNAME` di conseguenza.
 
 ## Struttura
 
