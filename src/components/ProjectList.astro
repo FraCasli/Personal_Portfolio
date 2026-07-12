@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { projects } from "../data/projects";
 import { withBase } from "../utils/url";
-import thumbGarniBarPost from "../assets/images/projects/ristorante-garni-bar-post/01-exterior.jpeg";
+import thumbGarniBarPost from "../assets/images/projects/ristorante-garni-bar-post/01-exterior.jpg";
 import thumbCasaSb from "../assets/images/projects/thumb-casa-sb.png";
 import thumbVersoSud from "../assets/images/projects/thumb-verso-sud.png";
 import thumbCasaLn from "../assets/images/projects/thumb-casa-ln.jpeg";
@@ -109,14 +109,6 @@ const builtSlugs = new Set((await getCollection("projects")).map((entry) => entr
   }
 
   @media (min-width: 64rem) {
-    .project-list {
-      grid-template-columns: 1fr 2fr 1fr;
-    }
-
-    .project-list ul {
-      grid-column: 2;
-    }
-
     .project-row {
       grid-template-columns: 1fr 1fr 1fr auto;
       align-items: center;

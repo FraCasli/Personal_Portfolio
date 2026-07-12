@@ -1,83 +1,50 @@
 ---
-import { Image } from "astro:assets";
-import TopBar from "./TopBar.astro";
 import SiteNav from "./SiteNav.astro";
 import { withBase } from "../utils/url";
-import heroMountain from "../assets/images/hero-mountain.jpg";
 ---
 
-<header class="site-header">
-  <TopBar />
-
-  <div class="hero">
-    <Image
-      class="hero__bg"
-      src={heroMountain}
-      alt="Cresta innevata al tramonto"
-      widths={[640, 960, 1440, 1920]}
-      sizes="100vw"
-      priority
-    />
-
-    <div class="hero__overlay container">
-      <div class="hero__top">
-        <div class="hero__top-right">
-          <div class="hero__identity">
-            <p class="hero__name">Francesca Caslini</p>
-            <p class="hero__role">MSc Arch. PoliMi</p>
-            <img
-              class="hero__signature"
-              src={withBase("/assets/images/signature.png")}
-              alt="Firma di Francesca Caslini"
-              width="870"
-              height="286"
-            />
-          </div>
-
-          <SiteNav class="hero__nav" />
-        </div>
+<header class="hero-content">
+  <div class="hero__top">
+    <div class="hero__top-right">
+      <div class="hero__identity">
+        <p class="hero__name">Francesca Caslini</p>
+        <p class="hero__role">MSc Arch. PoliMi</p>
+        <img
+          class="hero__signature"
+          src={withBase("/assets/images/signature.png")}
+          alt="Firma di Francesca Caslini"
+          width="870"
+          height="286"
+        />
       </div>
 
-      <div class="hero__title-block">
-        <h1 class="hero__title">Architecture<br />portfolio</h1>
-        <p class="hero__hint">Scroll to see the selected projects</p>
-      </div>
+      <SiteNav class="hero__nav" />
     </div>
+  </div>
+
+  <div class="hero__title-block">
+    <h1 class="hero__title">Architecture portfolio</h1>
+    <p class="hero__hint">
+      Go to the selected projects
+      <span class="hero__arrows" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </p>
   </div>
 </header>
 
 <style>
-  .site-header {
-    background-color: var(--color-bg);
-  }
-
-  .hero {
-    position: relative;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-  }
-
-  .hero__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero__overlay {
-    position: relative;
-    height: 100%;
+  .hero-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: var(--space-4);
-    padding: var(--space-3);
+    gap: var(--space-6);
+    padding: var(--space-3) var(--space-3) var(--space-6);
   }
 
   .hero__top {
     display: flex;
     justify-content: flex-end;
+    padding-right: 3.5rem;
   }
 
   .hero__top-right {
@@ -95,7 +62,7 @@ import heroMountain from "../assets/images/hero-mountain.jpg";
     align-items: flex-end;
     gap: var(--space-1);
     text-align: right;
-    color: var(--color-gold);
+    color: var(--color-text);
     min-width: 0;
   }
 
@@ -118,40 +85,60 @@ import heroMountain from "../assets/images/hero-mountain.jpg";
   }
 
   .hero__title-block {
-    align-self: flex-end;
     min-width: 0;
     max-width: 100%;
-    text-align: right;
-    color: var(--color-gold);
+    text-align: left;
+    color: var(--color-text);
   }
 
   .hero__title {
     font-weight: var(--font-weight-book);
-    font-size: clamp(1.75rem, 8vw, var(--font-size-xl));
+    font-size: clamp(1.5rem, 6vw, var(--font-size-xl));
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     line-height: var(--line-height-tight);
   }
 
   .hero__hint {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
     margin-top: var(--space-3);
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-sm);
   }
 
-  @media (min-width: 40rem) {
-    .hero {
-      aspect-ratio: 16 / 10;
-    }
+  .hero__arrows {
+    display: inline-flex;
+    gap: 0.2em;
+  }
 
+  .hero__arrows span {
+    width: 0;
+    height: 0;
+    border-top: 0.3em solid transparent;
+    border-bottom: 0.3em solid transparent;
+    border-left: 0.35em solid var(--color-text);
+  }
+
+  @media (min-width: 40rem) {
     .hero__signature {
       width: 10rem;
     }
   }
 
   @media (min-width: 64rem) {
-    .hero {
-      aspect-ratio: 1920 / 1034;
+    .hero-content {
+      min-height: 100vh;
+      padding: var(--space-4) var(--space-4) var(--space-9);
+    }
+
+    .hero__top {
+      padding-right: 14rem;
+    }
+
+    .hero__title-block {
+      margin-top: auto;
     }
   }
 </style>

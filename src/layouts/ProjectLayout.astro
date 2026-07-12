@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import "../styles/main.css";
-import TopBar from "../components/TopBar.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
 import { withBase } from "../utils/url";
@@ -26,7 +25,6 @@ const { title, code, details, gallery, nextProject } = Astro.props;
     <meta name="description" content={`${title}: ${details.map((d) => `${d.label} ${d.value}`).join(", ")}.`} />
   </head>
   <body>
-    <TopBar href={withBase("/")} />
     <main>
       <div class="project container">
         <aside class="project__intro">
@@ -183,11 +181,6 @@ const { title, code, details, gallery, nextProject } = Astro.props;
     }
 
     .project__intro {
-      position: sticky;
-      top: var(--space-3);
-    }
-
-    .project__nav {
       position: sticky;
       top: var(--space-3);
     }

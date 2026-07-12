@@ -1,16 +1,24 @@
 ---
 import { Image } from "astro:assets";
 import "../styles/main.css";
-import TopBar from "../components/TopBar.astro";
 import SiteNav from "../components/SiteNav.astro";
 import Footer from "../components/Footer.astro";
 import { withBase } from "../utils/url";
 import cvPortrait from "../assets/images/cv-portrait.jpg";
 
+interface CvBullet {
+  label?: string;
+  text: string;
+}
+
 interface CvEntry {
   date: string;
-  role?: string;
-  lines: string[];
+  location?: string;
+  role: string;
+  company?: string;
+  intro?: string;
+  note?: string;
+  bullets?: CvBullet[];
 }
 
 interface CvSection {
@@ -20,158 +28,118 @@ interface CvSection {
 
 const sections: CvSection[] = [
   {
-    title: "Education and training",
-    entries: [
-      {
-        date: "Sep 2020 - May 2023",
-        role: "Master Degree in Architecture - Built Environment – Interiors",
-        lines: [
-          "Politecnico di Milano - Piazza Leonardo da Vinci, 32 20133 Milano MI",
-          "Final mark obtained: 110 cum laude /100   Average: 29.37 / 30",
-        ],
-      },
-      {
-        date: "Dec 2020 - Feb 2023",
-        role: "ASP - Alta Scuola Politecnica",
-        lines: [
-          "Multidisciplinary international honour program",
-          "Politecnico di Milano - Piazza Leonardo da Vinci, 32 20133 Milano MI",
-          "Politecnico di Torino - Corso Duca degli Abruzzi, 24, 10129 Torino TO",
-        ],
-      },
-      {
-        date: "Sep 2021 - Feb 2022",
-        role: "Erasmus+ Programme",
-        lines: ["Manchester School of Architecture - Manchester Technology Centre, Oxford Rd, Manchester M1 7ED, United Kingdom"],
-      },
-      {
-        date: "Sep 2017 - Sep 2020",
-        role: "Bachelor degree in Architectural design",
-        lines: [
-          "Politecnico di Milano - Piazza Leonardo da Vinci, 32 20133 Milano MI",
-          "Final mark obtained: 110 cum laude /100   Average: 29.1 / 30",
-        ],
-      },
-      {
-        date: "Sept 2011 - Jul 2016",
-        role: "High School Diploma",
-        lines: ["Scientific Lyceum - Filippo Lussana - Via Angelo Maj, 1, 24121 Bergamo BG", "Final mark obtained: 80 / 100"],
-      },
-    ],
-  },
-  {
     title: "Professional experience",
     entries: [
       {
-        date: "Jan 2024 - Mar 2024",
-        role: "Ruinelli Associati Architetti — Architect",
-        lines: [
-          "Giümella 3, 7610 Soglio CH",
-          "Project: Competition for a New School in Maloja, Bregaglia, Switzerland. In collaboration with Bernardo Bader Architekten - Klostergasse 9a, 6900 Bregenz, Austria.",
+        location: "Soglio GR, CH",
+        date: "08/24 - ongoing",
+        role: "Architectural Project Coordinator",
+        company: "at Alder Clavuot Nunzi Architekten GmbH ETH SIA",
+        intro:
+          "High-end alpine hospitality and residential renovation projects in Engadin and Bregaglia, with growing responsibilities from design development to tendering, execution and construction phase coordination.",
+        bullets: [
+          {
+            label: "Design development",
+            text: "translated design intent into refined architectural layouts and technical packages, ensuring consistency between spatial concept, material quality, execution details and site constraints. Evolving project concepts into coherent, buildable proposals up to building permit stage.",
+          },
+          {
+            label: "Technical documentation, tendering and cost control",
+            text: "produced executive drawings, construction details, tender packages, BOQs, RFQs and quote comparisons, aligning scope, technical requirements, supplier offers and cost-related inputs with contractors, suppliers and vendors.",
+          },
+          {
+            label: "Construction coordination and detail control",
+            text: "supported construction activities by checking works on site, including custom joinery elements produced together with specialist cabinetmakers and metalworkers, reviewing details, materials and workmanship with contractors and suppliers, and assisting in resolving issues to maintain the intended quality.",
+          },
+          {
+            label: "Time-sensitive delivery",
+            text: "used to working with tight deadlines to ensure project completion ahead of seasonal reopening.",
+          },
         ],
       },
       {
-        date: "Jan 2023 - Jul 2023",
-        role: "Ruinelli Associati Architetti — Architectural Intern",
-        lines: [
-          "Giümella 3, 7610 Soglio CH",
-          "Projects: Design of a detached house in Maloja (GR), starting with the first drafts. Design of a house on the island of Crete. Requalification and conversion of a private house with an attached barn, in Stampa (GR). Preliminary study for the construction of a new square and the municipal building in Talamona (SO).",
+        location: "Soglio GR, CH",
+        date: "01/23 - 03/24",
+        role: "Architectural designer",
+        company: "at Ruinelli Associati Architetti",
+        bullets: [
+          {
+            label: "Concept and design development",
+            text: "contributed to architectural concepts, design development and contextual strategies for alpine residential, civic and adaptive reuse projects.",
+          },
+          {
+            label: "Technical documentation and detailing",
+            text: "developed drawings, construction details and project documentation with strong focus on materials, precision and execution quality.",
+          },
+          {
+            label: "Material sensitivity",
+            text: "developed a strong design culture based on material precision, contextual sensitivity and high-quality detailing, transferable to luxury brand environments where aesthetics and execution standards must remain consistent.",
+          },
         ],
       },
       {
-        date: "Oct 2023 - Dec 2023",
-        role: "Officina Magisafi - Collaboration",
-        lines: ["Via Cinque Martiri, 1, 24029 Vertova BG", "Project: Requalification and conversion of a shed, Monte Cavlera, BG"],
+        location: "Milan MI, IT",
+        date: "09/21 - 04/24",
+        role: "Teaching assistant",
+        company: "at Politecnico di Milano",
+        intro:
+          "Supported teaching activities for Architectural Design and Fundamentals of Representation, assisting with student reviews, drawing feedback, design development and course coordination.",
       },
       {
-        date: "May 2022 - Jun 2022",
-        role: "Studio A/C - Alessia Pessano, Chiara Novello — Curricular Internship",
-        lines: ["Via Cellini 6, 20129 Milano MI"],
-      },
-      {
-        date: "Oct 2019 - Nov 2019",
-        role: "02 Arch - Ettore Bergamasco, Andrea Starr Stabile — Curricular Internship",
-        lines: ["Via Andrea Appiani 3, 20121 Milano MI"],
+        location: "Milan MI, IT",
+        date: "2 months each",
+        role: "Earlier Architectural Experiences - Internships",
+        company: "at Officina Magisafi, Studio A/C and 02 Arch",
       },
     ],
   },
   {
-    title: "Didactic experiences",
+    title: "Education and training",
     entries: [
       {
-        date: "Sep 2023 - ongoing",
-        role: "Didactic Collaboration — Course: Laboratorio di Progettazione Architettonica",
-        lines: [
-          "Bachelor degree in Architectural design - I year of study",
-          "Professors: Bovati Marco, Casonato Camilla",
-          "Politecnico di Milano - Piazza Leonardo da Vinci, 32 20133 Milano MI",
-        ],
+        date: "12/20 - 02/23",
+        role: "ASP - Alta Scuola Politecnica | Politecnico di Milano e Politecnico di Torino",
+        note: "Multidisciplinary international honour program",
       },
       {
-        date: "Sep 2022 - Nov 2023",
-        role: "Didactic Collaboration — Course: Fondamenti della Rappresentazione",
-        lines: ["Bachelor degree in Architectural design - I year of study", "Professor: Villa Daniele", "Politecnico di Milano - Piazza Leonardo da Vinci, 32 20133 Milano MI"],
+        date: "09/20 - 05/23",
+        role: "Master's Degree in Architecture - Built Environment – Interiors | Politecnico di Milano",
+        note: "110/110 cum laude   Average grade: 29.37 / 30",
       },
       {
-        date: "Sep 2021 - Nov 2022",
-        role: "Didactic Collaboration — Course: Fondamenti della Rappresentazione",
-        lines: ["Bachelor degree in Architectural design - I year of study", "Professor: Villa Daniele", "Politecnico di Milano - Piazza Leonardo da Vinci, 32 20133 Milano MI"],
-      },
-    ],
-  },
-  {
-    title: "Participations to research",
-    entries: [
-      {
-        date: "Feb 2020 - May 2020",
-        role: "Quarantined house-lives. A biography",
-        lines: [
-          "An exploration of house-lives biographies in quarantined times, through the works of bachelor students from Politecnico di Milano.",
-          "Professors: Gennaro Postiglione, Paola Giuseppina Briata, Giovanni Hänninen",
-          "Other participants - Students of the course Final design workshop - Bachelor degree in Architectural design - III years of study",
-        ],
-      },
-    ],
-  },
-  {
-    title: "Graduation thesis",
-    entries: [
-      {
-        date: "May 2023",
-        role: "Master Thesis",
-        lines: ["A dialogue between nature and human sign at high altitude. The project for three bivouacs in the Dolomites.", "Professors: Marco Bovati, Daniele Villa"],
+        date: "09/21 - 02/22",
+        role: "Erasmus+ Programme | Manchester School of Architecture",
       },
       {
-        date: "Sep 2020",
-        role: "Bachelor Thesis",
-        lines: ["Feel the space. Architecture told by blind people", "Professors: Daniele Villa"],
-      },
-    ],
-  },
-  {
-    title: "Workshop",
-    entries: [
-      {
-        date: "Aug 2019",
-        role: "Participation to the workshop Cortona Open 3D",
-        lines: ["Politecnico di Milano - Piazza Leonardo da Vinci, 32 20133 Milano MI", "Gianluca Emilio Ennio Vita"],
+        date: "09/17 - 09/20",
+        role: "Bachelor's degree in Architectural design | Politecnico di Milano",
+        note: "110/110 cum laude   Average grade: 29.1 / 30",
       },
     ],
   },
 ];
 
-const skills = [
-  "AutoCAD   -   advanced level",
-  "ArchiCAD   -   advanced level",
-  "Rhinoceros and Grasshopper   -   intermediate level",
-  "3ds Max and Corona   -   intermediate level",
-  "Adobe Creative Suite (Acrobat, Photoshop, Illustrator, Indesign)   -   advanced level",
-  "Figma   -   advanced level",
-  "Microsoft Office Package (Word, Excel)   -   advanced level",
-  "Experience in model making with various techniques (timber, cardboard, styrofoam, concrete, plaster, etc.)   -   advanced level",
+const skills: CvBullet[] = [
+  {
+    label: "Design and architecture",
+    text: "spatial planning, high-end interiors, material research, design intent translation, technical guidelines, detail validation.",
+  },
+  {
+    label: "Design and Technical Documentation",
+    text: "executive drawings, technical detailing, renovation projects, hospitality projects, adaptive reuse, Swiss alpine construction context.",
+  },
+  {
+    label: "Construction Coordination and Cost Control",
+    text: "MS Project, tender documentation, BOQs, RFQs, quote comparison, contractor invoice review, quantity statement verification, contractor and supplier coordination, cost tracking, site progress tracking, permitting support, construction documentation, project close-out.",
+  },
+  {
+    label: "Software",
+    text: "Excel, Microsoft Suite, AutoCAD, Vectorworks, ArchiCAD, Adobe Creative Suite, Rhino, Grasshopper, 3ds Max, Figma.",
+  },
+  {
+    label: "Languages",
+    text: "Italian native | English B2/C1 | German A1/A2 in progress",
+  },
 ];
-
-const languages = ["Italian   -   mother tongue", "English   -   TOEIC"];
 ---
 
 <!doctype html>
@@ -183,7 +151,6 @@ const languages = ["Italian   -   mother tongue", "English   -   TOEIC"];
     <meta name="description" content="Curriculum vitae di Francesca Caslini, MSc Arch. PoliMi: formazione, esperienze professionali e didattiche, ricerca, tesi, competenze." />
   </head>
   <body>
-    <TopBar href={withBase("/")} />
     <main>
       <div class="cv container">
         <aside class="cv__profile">
@@ -194,9 +161,8 @@ const languages = ["Italian   -   mother tongue", "English   -   TOEIC"];
           </div>
           <div class="cv__contact">
             <p>+39 3337438860</p>
-            <p><a href="mailto:francesca.caslini@mail.polimi.it">francesca.caslini@mail.polimi.it</a></p>
-            <p>19 Aprile 1997</p>
-            <p>Via P. Nenni 9, 24020 Scanzorosciate BG</p>
+            <p><a href="mailto:francesca.caslini@gmail.com">francesca.caslini@gmail.com</a></p>
+            <p>Via Sott Paré 8, Bregaglia GR (CH)</p>
           </div>
           <img
             class="cv__signature"
@@ -214,12 +180,26 @@ const languages = ["Italian   -   mother tongue", "English   -   TOEIC"];
               <ul class="cv-entries">
                 {section.entries.map((entry) => (
                   <li class="cv-entry">
-                    <p class="cv-entry__date">{entry.date}</p>
+                    <div class="cv-entry__meta">
+                      {entry.location && <p class="cv-entry__location">{entry.location}</p>}
+                      <p class="cv-entry__date">{entry.date}</p>
+                    </div>
                     <div class="cv-entry__body">
-                      {entry.role && <p class="cv-entry__role">{entry.role}</p>}
-                      {entry.lines.map((line) => (
-                        <p>{line}</p>
-                      ))}
+                      <p class="cv-entry__role">{entry.role}</p>
+                      {entry.company && <p class="cv-entry__company">{entry.company}</p>}
+                      {entry.note && <p class="cv-entry__note">{entry.note}</p>}
+                      {entry.intro && <p class="cv-entry__intro">{entry.intro}</p>}
+                      {entry.bullets && entry.bullets.length > 0 && (
+                        <ul class="cv-entry__bullets">
+                          {entry.bullets.map((bullet) => (
+                            <li>
+                              {bullet.label && <strong>{bullet.label}</strong>}
+                              {bullet.label && ": "}
+                              {bullet.text}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </li>
                 ))}
@@ -231,26 +211,14 @@ const languages = ["Italian   -   mother tongue", "English   -   TOEIC"];
             <h2 class="cv-section__title">Skills</h2>
             <ul class="cv-list">
               {skills.map((skill) => (
-                <li>{skill}</li>
+                <li>
+                  {skill.label && <strong>{skill.label}</strong>}
+                  {skill.label && ": "}
+                  {skill.text}
+                </li>
               ))}
             </ul>
           </section>
-
-          <section class="cv-section">
-            <h2 class="cv-section__title">Languages</h2>
-            <ul class="cv-list">
-              {languages.map((language) => (
-                <li>{language}</li>
-              ))}
-            </ul>
-          </section>
-
-          <p class="cv-consent">
-            According to law 679/2016 of the Regulation of the European Parliament of 27th April 2016, I hereby express my consent to
-            process and use my data provided in this CV and application for recruiting purposes.
-            <br />
-            Thank you for your attention.
-          </p>
         </div>
 
         <SiteNav class="cv__nav" />
@@ -346,44 +314,71 @@ const languages = ["Italian   -   mother tongue", "English   -   TOEIC"];
     padding-bottom: 0;
   }
 
-  .cv-entry__date,
-  .cv-entry__body p {
+  .cv-entry__meta {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cv-entry__location,
+  .cv-entry__date {
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-sm);
     letter-spacing: var(--tracking-base);
+    font-style: italic;
   }
 
-  .cv-entry__date {
-    color: var(--color-blue);
+  .cv-entry__body p,
+  .cv-entry__bullets {
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-sm);
+    letter-spacing: var(--tracking-base);
+    line-height: var(--line-height-base);
   }
 
   .cv-entry__role {
     font-weight: var(--font-weight-book);
   }
 
+  .cv-entry__company {
+    font-style: italic;
+  }
+
+  .cv-entry__note {
+    color: var(--color-blue);
+  }
+
   .cv-entry__body {
     display: flex;
     flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .cv-entry__bullets {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-1);
+    padding-left: var(--space-3);
+  }
+
+  .cv-entry__bullets li {
+    position: relative;
+  }
+
+  .cv-entry__bullets li::before {
+    content: "-";
+    position: absolute;
+    left: calc(-1 * var(--space-2));
   }
 
   .cv-list {
     margin-top: var(--space-4);
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-sm);
-    letter-spacing: var(--tracking-base);
-  }
-
-  .cv-consent {
+    gap: var(--space-2);
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-sm);
     letter-spacing: var(--tracking-base);
     line-height: var(--line-height-base);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-grey);
   }
 
   @media (min-width: 40rem) {
@@ -392,7 +387,7 @@ const languages = ["Italian   -   mother tongue", "English   -   TOEIC"];
       gap: var(--space-4);
     }
 
-    .cv-entry__date {
+    .cv-entry__meta {
       min-width: 10rem;
       flex-shrink: 0;
     }
@@ -405,11 +400,6 @@ const languages = ["Italian   -   mother tongue", "English   -   TOEIC"];
     }
 
     .cv__profile {
-      position: sticky;
-      top: var(--space-3);
-    }
-
-    .cv__nav {
       position: sticky;
       top: var(--space-3);
     }

@@ -14,10 +14,19 @@ const linkFor = (slug: string) => withBase(builtSlugs.has(slug) ? `/projects/${s
 
 const professionalProjects = projects.filter((p) => p.category === "professional");
 const universityProjects = projects.filter((p) => p.category === "university");
+
+const toggleId = `site-nav-toggle-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
 <nav class:list={["site-nav", className]} aria-label="Sezioni del portfolio">
-  <ul>
+  <input type="checkbox" id={toggleId} class="site-nav__toggle-input" />
+  <label for={toggleId} class="site-nav__toggle-label" aria-label="Apri il menu">
+    <span class="site-nav__toggle-icon" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </span>
+  </label>
+
+  <ul class="site-nav__list">
     <li><a href={withBase("/")}>Home</a></li>
     <li>
       <details>
@@ -45,8 +54,32 @@ const universityProjects = projects.filter((p) => p.category === "university");
 
 <style>
   .site-nav {
+    position: fixed;
+    top: var(--space-3);
+    right: var(--space-3);
+    z-index: 50;
     min-width: 0;
-    max-width: 100%;
+    max-width: calc(100% - 2 * var(--space-3));
+  }
+
+  .site-nav ul.site-nav__list {
+    background-color: var(--color-bg);
+    padding: var(--space-2);
+    border: 1px solid var(--color-grey);
+  }
+
+  .site-nav__toggle-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .site-nav__toggle-label {
+    display: none;
   }
 
   .site-nav ul {
@@ -97,5 +130,48 @@ const universityProjects = projects.filter((p) => p.category === "university");
   .site-nav a:hover,
   .site-nav summary:hover {
     color: var(--color-blue);
+  }
+
+  @media (max-width: 63.9375rem) {
+    .site-nav__toggle-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: var(--color-black);
+      cursor: pointer;
+    }
+
+    .site-nav__toggle-input:focus-visible + .site-nav__toggle-label {
+      outline: 2px solid var(--color-blue);
+      outline-offset: 2px;
+    }
+
+    .site-nav__toggle-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .site-nav__toggle-icon span {
+      display: block;
+      width: 1.1rem;
+      height: 2px;
+      background-color: var(--color-white);
+    }
+
+    .site-nav ul.site-nav__list {
+      display: none;
+      position: absolute;
+      top: calc(100% + var(--space-1));
+      right: 0;
+      min-width: 12rem;
+    }
+
+    .site-nav__toggle-input:checked ~ .site-nav__list {
+      display: flex;
+    }
   }
 </style>
