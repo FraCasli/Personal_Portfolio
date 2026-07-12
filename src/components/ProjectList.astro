@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import { projects } from "../data/projects";
 import { withBase } from "../utils/url";
 import thumbGarniBarPost from "../assets/images/projects/ristorante-garni-bar-post/01-exterior.jpg";
+import thumbStallaMontaccio from "../assets/images/projects/stalla-montaccio/01-interior-kitchen.png";
 import thumbCasaSb from "../assets/images/projects/thumb-casa-sb.png";
 import thumbVersoSud from "../assets/images/projects/thumb-verso-sud.png";
 import thumbCasaLn from "../assets/images/projects/thumb-casa-ln.jpeg";
@@ -11,23 +12,18 @@ import thumbStudentHostel from "../assets/images/projects/thumb-student-hostel.p
 import thumbDiffusedHouse from "../assets/images/projects/thumb-diffused-house.png";
 import thumbSchoolRubattino from "../assets/images/projects/thumb-school-rubattino.png";
 import thumbHedgehog1 from "../assets/images/projects/thumb-hedgehog-1.png";
-import thumbHedgehog2 from "../assets/images/projects/thumb-hedgehog-2.png";
-import thumbAgencyOfFuture from "../assets/images/projects/thumb-agency-of-future.png";
 import thumbColonie from "../assets/images/projects/thumb-colonie.png";
 
 const thumbnails: Record<string, { src: ImageMetadata; alt: string }[]> = {
   "ristorante-garni-bar-post": [{ src: thumbGarniBarPost, alt: "Ristorante Garni Bar Post, Castasegna" }],
+  "stalla-montaccio": [{ src: thumbStallaMontaccio, alt: "Stalla Montaccio, Montaccio" }],
   "casa-sb": [{ src: thumbCasaSb, alt: "Casa SB, Maloja" }],
   "verso-sud": [{ src: thumbVersoSud, alt: "Verso Sud, Crete" }],
   "casa-ln": [{ src: thumbCasaLn, alt: "Casa LN, Stampa" }],
   "student-hostel": [{ src: thumbStudentHostel, alt: "Student hostel, Milano" }],
   "diffused-house": [{ src: thumbDiffusedHouse, alt: "Diffused house, Monesteroli" }],
   "school-rubattino": [{ src: thumbSchoolRubattino, alt: "A school for Rubattino, Milano" }],
-  hedgehog: [
-    { src: thumbHedgehog1, alt: "Hedgehog, Milano — vista 1" },
-    { src: thumbHedgehog2, alt: "Hedgehog, Milano — vista 2" },
-  ],
-  "agency-of-future": [{ src: thumbAgencyOfFuture, alt: "Agency of Future, Milano" }],
+  hedgehog: [{ src: thumbHedgehog1, alt: "Hedgehog, Milano" }],
   colonie: [{ src: thumbColonie, alt: "Colonie, Milano" }],
 };
 
@@ -72,6 +68,15 @@ const builtSlugs = new Set((await getCollection("projects")).map((entry) => entr
     display: grid;
     grid-template-columns: 1fr;
     padding: 0 var(--space-3) var(--space-7);
+  }
+
+  /* Extra breathing room before the first project row on mobile, on top
+     of the hero-content bottom padding, so the list doesn't crowd the
+     hero's title/hint right after the first scroll. */
+  @media (max-width: 63.99rem) {
+    .project-list {
+      padding-top: var(--space-6);
+    }
   }
 
   .project-row {

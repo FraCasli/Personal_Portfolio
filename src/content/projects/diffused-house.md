@@ -1,6 +1,6 @@
 ---
 title: "Diffused House"
-code: "b2 | Diffused house"
+code: "b2"
 category: "university"
 order: 2
 details:

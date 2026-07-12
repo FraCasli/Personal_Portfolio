@@ -1,6 +1,6 @@
 ---
 title: "A School for Rubattino"
-code: "b3 | A school for Rubattino"
+code: "b3"
 category: "university"
 order: 3
 details:
@@ -25,14 +25,13 @@ gallery:
   - image: "../../assets/images/projects/school-rubattino/02-plan.png"
     alt: "A School for Rubattino — planimetria"
     caption: "Plan"
-  - image: "../../assets/images/projects/school-rubattino/03-street-view.png"
-    alt: "A School for Rubattino — vista prospettica su strada con panchina"
+  - image: "../../assets/images/projects/school-rubattino/09-corridor-photo.png"
+    alt: "A School for Rubattino — vista del corridoio interno"
+  - image: "../../assets/images/projects/school-rubattino/10-materials-board.png"
+    alt: "A School for Rubattino — tavola dei materiali"
   - image: "../../assets/images/projects/school-rubattino/04-classroom-section.png"
     alt: "A School for Rubattino — sezione dell'aula"
     caption: "Classroom | Section"
-  - image: "../../assets/images/projects/school-rubattino/05-classroom-plan.png"
-    alt: "A School for Rubattino — vista interna dell'aula"
-    caption: "Classroom | Plan"
   - image: "../../assets/images/projects/school-rubattino/06-construction-details.png"
     alt: "A School for Rubattino — dettagli costruttivi"
     caption: "Construction details"
@@ -42,10 +41,6 @@ gallery:
   - image: "../../assets/images/projects/school-rubattino/08-physical-model-2.jpeg"
     alt: "A School for Rubattino — foto del modello fisico, 2"
     caption: "Physical model 1:10"
-  - image: "../../assets/images/projects/school-rubattino/09-corridor-photo.png"
-    alt: "A School for Rubattino — vista del corridoio interno"
-  - image: "../../assets/images/projects/school-rubattino/10-materials-board.png"
-    alt: "A School for Rubattino — tavola dei materiali"
 ---
 
 The project has two main objectives: the spatial representation of the new innovative didactic methodologies and the urban requalification. To achieve these goals, the school goes beyond its educational purpose and opens up to the neighbourhood, thus becoming an aggregation point.

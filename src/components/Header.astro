@@ -24,7 +24,7 @@ import { withBase } from "../utils/url";
 
   <div class="hero__title-block">
     <h1 class="hero__title">Architecture portfolio</h1>
-    <a class="hero__hint" href="#projects">
+    <a class="hero__hint" href={withBase("/projects/ristorante-garni-bar-post/")}>
       Go to the selected projects
       <span class="hero__arrows" aria-hidden="true">
         <span></span><span></span><span></span>
@@ -44,7 +44,6 @@ import { withBase } from "../utils/url";
   .hero__top {
     display: flex;
     justify-content: flex-end;
-    padding-right: 3.5rem;
   }
 
   .hero__top-right {
@@ -89,6 +88,7 @@ import { withBase } from "../utils/url";
     max-width: 100%;
     text-align: left;
     color: var(--color-text);
+    margin-top: auto;
   }
 
   .hero__title {
@@ -140,6 +140,16 @@ import { withBase } from "../utils/url";
     }
   }
 
+  /* On mobile the hero image sits above this block at aspect-ratio 4/3
+     (height ≈ 75vw). Filling the rest of the viewport here pushes the
+     title/hint to the bottom of the first screen, so the project list
+     below only appears once the visitor scrolls. */
+  @media (max-width: 63.99rem) {
+    .hero-content {
+      min-height: calc(100svh - 75vw);
+    }
+  }
+
   @media (min-width: 64rem) {
     .hero-content {
       min-height: 100vh;
@@ -148,10 +158,6 @@ import { withBase } from "../utils/url";
 
     .hero__top {
       padding-right: 14rem;
-    }
-
-    .hero__title-block {
-      margin-top: auto;
     }
   }
 </style>

@@ -1,6 +1,6 @@
 ---
 title: "Student Hostel"
-code: "b1 | Student hostel"
+code: "b1"
 category: "university"
 order: 1
 details:

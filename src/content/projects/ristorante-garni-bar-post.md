@@ -1,6 +1,6 @@
 ---
-title: "Ristorante Garni Bar Post"
-code: "a1 | Ristorante Garni Bar Post"
+title: "Garni Bar Post"
+code: "a1"
 category: "professional"
 order: 1
 details:
@@ -21,7 +21,6 @@ gallery:
     alt: "Ristorante Garni Bar Post — sezione con fasi di intervento"
   - image: "../../assets/images/projects/ristorante-garni-bar-post/03-ground-floor-plan-phase1.png"
     alt: "Ristorante Garni Bar Post — pianta piano terra, fase 1"
-    caption: "Ground floor — Phase 1"
   - image: "../../assets/images/projects/ristorante-garni-bar-post/04-bar-reception.png"
     alt: "Ristorante Garni Bar Post — bancone bar in ottone e reception"
   - image: "../../assets/images/projects/ristorante-garni-bar-post/05-brass-counter-detail.png"
@@ -32,7 +31,6 @@ gallery:
     alt: "Ristorante Garni Bar Post — isola cucina, vista 2"
   - image: "../../assets/images/projects/ristorante-garni-bar-post/08-first-floor-plan-phase2.png"
     alt: "Ristorante Garni Bar Post — pianta primo piano, fase 2"
-    caption: "Upper floor — Phase 2"
   - image: "../../assets/images/projects/ristorante-garni-bar-post/09-bathroom-corridor.png"
     alt: "Ristorante Garni Bar Post — corridoio e bagno camera ospiti"
   - image: "../../assets/images/projects/ristorante-garni-bar-post/10-bedroom.png"

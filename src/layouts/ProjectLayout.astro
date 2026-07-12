@@ -7,13 +7,12 @@ import { withBase } from "../utils/url";
 
 interface Props {
   title: string;
-  code: string;
   details: { label: string; value: string }[];
   gallery: { image: ImageMetadata; alt: string; caption?: string }[];
   nextProject?: { slug: string; code: string };
 }
 
-const { title, code, details, gallery, nextProject } = Astro.props;
+const { title, details, gallery, nextProject } = Astro.props;
 ---
 
 <!doctype html>
@@ -28,7 +27,6 @@ const { title, code, details, gallery, nextProject } = Astro.props;
     <main>
       <div class="project container">
         <aside class="project__intro">
-          <p class="project__code">{code}</p>
           <h1 class="project__title">{title}</h1>
           <dl class="project__details">
             {details.map((detail) => (
@@ -70,17 +68,10 @@ const { title, code, details, gallery, nextProject } = Astro.props;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-6);
-    padding: var(--space-7) var(--space-3);
-  }
-
-  .project__code {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-sm);
-    letter-spacing: var(--tracking-base);
+    padding: var(--space-3) var(--space-3) var(--space-7);
   }
 
   .project__title {
-    margin-top: var(--space-2);
     font-weight: var(--font-weight-book);
     font-size: var(--font-size-md);
     letter-spacing: var(--tracking-wide);
@@ -151,7 +142,6 @@ const { title, code, details, gallery, nextProject } = Astro.props;
   .project__gallery-item img {
     width: 100%;
     height: auto;
-    border: 1px solid rgba(0, 0, 0, 0.2);
   }
 
   .project__gallery-item figcaption {

@@ -1,8 +1,8 @@
 ---
 title: "Casa SB"
-code: "a2 | Casa SB"
+code: "a3"
 category: "professional"
-order: 2
+order: 3
 details:
   - label: "Location"
     value: "Maloja, GR"

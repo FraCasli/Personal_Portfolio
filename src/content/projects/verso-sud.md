@@ -1,8 +1,8 @@
 ---
 title: "Verso Sud"
-code: "a3 | Verso Sud"
+code: "a4"
 category: "professional"
-order: 3
+order: 4
 details:
   - label: "Location"
     value: "Crete"
@@ -20,6 +20,10 @@ gallery:
   - image: "../../assets/images/projects/verso-sud/01-siteplan.png"
     alt: "Verso Sud — planimetria generale"
     caption: "Siteplan"
+  - image: "../../assets/images/projects/verso-sud/14-exterior-render.png"
+    alt: "Verso Sud — render esterno, 1"
+  - image: "../../assets/images/projects/verso-sud/15-exterior-render-2.png"
+    alt: "Verso Sud — render esterno, 2"
   - image: "../../assets/images/projects/verso-sud/02-ground-floor-building-a.png"
     alt: "Verso Sud — pianta piano terra, edificio A"
     caption: "Ground floor plan - Building A"
@@ -56,10 +60,6 @@ gallery:
   - image: "../../assets/images/projects/verso-sud/13-west-elevation.png"
     alt: "Verso Sud — prospetto ovest"
     caption: "West Elevation"
-  - image: "../../assets/images/projects/verso-sud/14-exterior-render.png"
-    alt: "Verso Sud — render esterno, 1"
-  - image: "../../assets/images/projects/verso-sud/15-exterior-render-2.png"
-    alt: "Verso Sud — render esterno, 2"
 ---
 
 The project involves the construction of a new residence in Crete. The building is characterised by its organisation in three volumes, which not only fragment a considerable volume into distinct elements reminiscent of typical dwellings in the area, but also contribute to shaping and articulating the external environment, defining spaces with different characteristics.

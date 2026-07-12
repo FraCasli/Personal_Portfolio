@@ -1,6 +1,6 @@
 ---
 title: "Colonie"
-code: "b6 | Colonie"
+code: "b6"
 category: "university"
 order: 6
 details:

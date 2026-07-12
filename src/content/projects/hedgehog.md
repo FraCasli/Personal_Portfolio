@@ -1,6 +1,6 @@
 ---
 title: "Hedgehog"
-code: "b4 | Hedgehog"
+code: "b4"
 category: "university"
 order: 4
 details:
@@ -34,13 +34,8 @@ gallery:
     alt: "Hedgehog — fotografia della struttura, vista esterna"
   - image: "../../assets/images/projects/hedgehog/06-possible-combinations.png"
     alt: "Hedgehog — possibili combinazioni dei pannelli"
-    caption: "Possible combinations"
   - image: "../../assets/images/projects/hedgehog/07-combinations-table.png"
     alt: "Hedgehog — tabella delle combinazioni possibili"
-    caption: "Possible combinations"
-  - image: "../../assets/images/projects/hedgehog/08-construction-details.png"
-    alt: "Hedgehog — dettagli costruttivi delle combinazioni"
-    caption: "Construction details of possible combinations"
 ---
 
 The objective was to design a 'temporary architectural object' that would have: a long-term reversibility, i.e. able to be constructed and dismantled in a simple manner; a short-term reversibility, i.e. able to adapt to different daily conditions.
