@@ -42,13 +42,25 @@
   }
 
   .site-footer__contact {
-    text-align: right;
+    text-align: left;
     font-weight: var(--font-weight-book);
     font-size: var(--font-size-sm);
     letter-spacing: var(--tracking-base);
   }
 
-  .site-footer__contact a:hover {
+  .site-footer__contact a:hover,
+  .site-footer__contact a:focus-visible {
     color: var(--color-blue);
+  }
+
+  .site-footer__contact a:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+
+  @media (min-width: 40rem) {
+    .site-footer__contact {
+      text-align: right;
+    }
   }
 </style>

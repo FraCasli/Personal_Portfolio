@@ -34,7 +34,7 @@ const thumbnails: Record<string, { src: ImageMetadata; alt: string }[]> = {
 const builtSlugs = new Set((await getCollection("projects")).map((entry) => entry.slug));
 ---
 
-<section class="project-list" aria-label="Progetti selezionati">
+<section id="projects" class="project-list" aria-label="Progetti selezionati">
   <ul>
     {projects.map((project) => {
       const isBuilt = builtSlugs.has(project.slug);
@@ -82,6 +82,11 @@ const builtSlugs = new Set((await getCollection("projects")).map((entry) => entr
     border-bottom: 1px solid var(--color-grey);
   }
 
+  .project-row:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+  }
+
   .project-row__code,
   .project-row__meta {
     font-weight: var(--font-weight-light);
@@ -91,21 +96,29 @@ const builtSlugs = new Set((await getCollection("projects")).map((entry) => entr
 
   .project-row__thumbs {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-2);
   }
 
   .project-row__thumb {
-    width: var(--size-thumb);
+    width: min(var(--size-thumb), 40vw);
     height: auto;
     aspect-ratio: 160 / 88;
     object-fit: cover;
-    opacity: var(--opacity-dim);
     transition: opacity var(--transition-base);
   }
 
-  .project-row:hover .project-row__thumb,
-  .project-row:focus-within .project-row__thumb {
-    opacity: 1;
+  /* Dim-until-hover only makes sense where hover exists; touch devices
+     always see full-opacity thumbnails instead of a permanently faded row. */
+  @media (hover: hover) and (pointer: fine) {
+    .project-row__thumb {
+      opacity: var(--opacity-dim);
+    }
+
+    .project-row:hover .project-row__thumb,
+    .project-row:focus-within .project-row__thumb {
+      opacity: 1;
+    }
   }
 
   @media (min-width: 64rem) {

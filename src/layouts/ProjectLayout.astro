@@ -170,8 +170,14 @@ const { title, code, details, gallery, nextProject } = Astro.props;
     letter-spacing: var(--tracking-base);
   }
 
-  .project__next:hover {
+  .project__next:hover,
+  .project__next:focus-visible {
     color: var(--color-blue);
+  }
+
+  .project__next:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
   }
 
   @media (min-width: 64rem) {

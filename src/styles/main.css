@@ -1,21 +1,5 @@
 @import "./tokens.css";
 
-@font-face {
-  font-family: "Futura LT";
-  src: url("/assets/fonts/FuturaLT-Light.woff2") format("woff2");
-  font-weight: var(--font-weight-light);
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Futura LT";
-  src: url("/assets/fonts/FuturaLT-Book.woff2") format("woff2");
-  font-weight: var(--font-weight-book);
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Jost (SIL OFL, self-hosted): geometric sans closely matching Futura's
    shapes, used as the active fallback until licensed Futura LT files are
    available. Both weights share one variable-font file, same as Google's
@@ -44,6 +28,12 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {

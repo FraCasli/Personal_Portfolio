@@ -270,8 +270,14 @@ const skills: CvBullet[] = [
     gap: var(--space-1);
   }
 
-  .cv__contact a:hover {
+  .cv__contact a:hover,
+  .cv__contact a:focus-visible {
     color: var(--color-blue);
+  }
+
+  .cv__contact a:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
   }
 
   .cv__signature {

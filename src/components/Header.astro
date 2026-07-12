@@ -24,12 +24,12 @@ import { withBase } from "../utils/url";
 
   <div class="hero__title-block">
     <h1 class="hero__title">Architecture portfolio</h1>
-    <p class="hero__hint">
+    <a class="hero__hint" href="#projects">
       Go to the selected projects
       <span class="hero__arrows" aria-hidden="true">
         <span></span><span></span><span></span>
       </span>
-    </p>
+    </a>
   </div>
 </header>
 
@@ -106,6 +106,19 @@ import { withBase } from "../utils/url";
     margin-top: var(--space-3);
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-sm);
+    cursor: pointer;
+    width: fit-content;
+    transition: opacity var(--transition-base);
+  }
+
+  .hero__hint:hover,
+  .hero__hint:focus-visible {
+    opacity: var(--opacity-dim);
+  }
+
+  .hero__hint:focus-visible {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 4px;
   }
 
   .hero__arrows {
